@@ -1,5 +1,5 @@
 import datetime
-from selenium import webdriver
+from selenium.webdriver import ActionChains
 
 
 class Base:
@@ -35,6 +35,7 @@ class Base:
         name_screenshot = f"screenshot_{now_date}.png"
         self.driver.save_screenshot(
             'C:\\PycharmProjects\\FinalTestTask\\screens\\' + name_screenshot)
+        print("Maked a screen")
 
     """Method that asserts the url"""
 
@@ -47,3 +48,10 @@ class Base:
 
     def scroll_page_down(self, value):
         self.driver.execute_script(f"window.scrollTo(0, {str(value)})")
+        print("Scrolled page")
+
+    """Method that scroll page up to a certain element"""
+
+    def move_to_element(self, element):
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element).perform()
