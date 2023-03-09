@@ -7,14 +7,15 @@ from pages.main_page import MainPage
 from pages.tv_page import TvPage
 
 
-def test_buy_tv_lg() -> None:
+def test_buy() -> None:
     driver = webdriver.Chrome(
         executable_path='C:\\PycharmProjects\\FinalTestTask\\utilities\\chromedriver.exe')
     base = Base(driver)
     base.open_main_page()
-    time.sleep(2)
-    tv = TvPage(driver)
-    tv.select_tvs()
-    time.sleep(2)
-
+    time.sleep(3)
+    mp = MainPage(driver)
+    mp.move_to_tv_tab()
+    time.sleep(5)
+    tvp = TvPage(driver)
+    tvp.full_brand_selection()
 

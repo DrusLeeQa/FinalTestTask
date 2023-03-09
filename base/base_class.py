@@ -3,7 +3,7 @@ from selenium import webdriver
 
 
 class Base:
-    url = "https://www.mvideo.ru/"
+    url = "https://www.wildberries.ru/"
 
     def __init__(self, driver):
         self.driver = driver
@@ -43,7 +43,7 @@ class Base:
         assert get_url == result
         print("Good value url")
 
-    """Method that scroll page down"""
+    """Method that scroll page down by a certain value"""
 
     def scroll_page_down(self, value):
         self.driver.execute_script(f"window.scrollTo(0, {str(value)})")
