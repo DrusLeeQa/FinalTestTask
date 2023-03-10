@@ -4,6 +4,10 @@ from selenium.webdriver import ActionChains
 
 class Base:
     url = "https://www.wildberries.ru/"
+    spp_name = None
+    spp_price = None
+    bp_name = None
+    bp_price = None
 
     def __init__(self, driver):
         self.driver = driver
@@ -14,6 +18,8 @@ class Base:
         self.driver.get(self.url)
         self.driver.maximize_window()
         print("\nOpen Browser")
+        self.get_current_url()
+        self.assert_url("https://www.wildberries.ru/")
 
     """Method that gets the current url"""
 
@@ -23,16 +29,17 @@ class Base:
 
     """Method that asserts the word"""
 
-    def assert_word(self, word, result):
+    @staticmethod
+    def assert_word(word, result):
         value_word = word.text
         assert value_word == result
         print("Good value word")
 
     """Method for taking screenshots"""
 
-    def get_screenshot(self):
+    def get_screenshot(self, value):
         now_date = datetime.datetime.utcnow().strftime("%d.%m.%Y")
-        name_screenshot = f"screenshot_{now_date}.png"
+        name_screenshot = f"screenshot_{value}_{now_date}.png"
         self.driver.save_screenshot(
             'C:\\PycharmProjects\\FinalTestTask\\screens\\' + name_screenshot)
         print("Maked a screen")
@@ -55,3 +62,9 @@ class Base:
     def move_to_element(self, element):
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
+
+    """Method delete 2 last symbols in word"""
+
+    @staticmethod
+    def del_two_last(word):
+        return word[:-2]

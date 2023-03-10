@@ -4,6 +4,8 @@ from selenium import webdriver
 from base.base_class import Base
 from pages.main_page import MainPage
 from pages.tv_page import TvPage
+from pages.selected_product_page import SelProPage
+from pages.basket_page import BasketPage
 
 
 def test_buy() -> None:
@@ -21,5 +23,10 @@ def test_buy() -> None:
     tvp.full_price_selection()
     tvp.full_all_filters_selection()
     tvp.click_select_our_tv()
-    time.sleep(sleep)
+    spp = SelProPage(driver)
+    spp.combine_add_and_move_to_basket()
+    bp = BasketPage(driver)
+    bp.combine_assert_name_and_price()
+    driver.quit()
+
 

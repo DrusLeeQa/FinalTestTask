@@ -11,10 +11,12 @@ class TvPage(Base):
         super().__init__(driver)
 
     # Service variables
+
     diagonal = '50"'
     sleep = 1
 
     # Locators
+
     brand_filter = "(//button[@class='dropdown-filter__btn'])[2]"
     show_all = "//button[@class='filter__show-all j-show-whole-filters']"
     search_brand = "//input[@class='j-search-filter']"
@@ -86,7 +88,7 @@ class TvPage(Base):
 
     def get_select_our_tv(self):
         return WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, self.select_our_tv)))
+            EC.visibility_of_element_located((By.XPATH, self.select_our_tv)))
 
     # Actions
 
@@ -148,6 +150,8 @@ class TvPage(Base):
         self.move_to_element(self.get_select_our_tv())
         self.get_select_our_tv().click()
         print("Selected our tv")
+        time.sleep(1.5)
+        self.get_screenshot("spp")
 
     # Methods
 

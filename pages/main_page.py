@@ -28,5 +28,4 @@ class MainPage(Base):
     # Methods
 
     def move_to_tv_tab(self):
-        self.get_current_url()
         self.input_in_search("Телевизоры")
