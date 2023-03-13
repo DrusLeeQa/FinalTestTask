@@ -3,6 +3,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
 from selenium.webdriver import ActionChains, Keys
+import allure
+from utilities.logger import Logger
 
 
 class MainPage(Base):
@@ -28,4 +30,7 @@ class MainPage(Base):
     # Methods
 
     def move_to_tv_tab(self):
-        self.input_in_search("Телевизоры")
+        with allure.step("Move to TV tab"):
+            Logger.add_start_step(method="move_to_tv_tab")
+            self.input_in_search("Телевизоры")
+            Logger.add_end_step(method="move_to_tv_tab")

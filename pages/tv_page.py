@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
+from utilities.logger import Logger
+import allure
 
 
 class TvPage(Base):
@@ -13,7 +15,6 @@ class TvPage(Base):
     # Service variables
 
     diagonal = '50"'
-    sleep = 1
 
     # Locators
 
@@ -147,47 +148,42 @@ class TvPage(Base):
         print("Click show")
 
     def click_select_our_tv(self):
-        self.move_to_element(self.get_select_our_tv())
-        self.get_select_our_tv().click()
-        print("Selected our tv")
-        time.sleep(1.5)
-        self.get_screenshot("spp")
+        with allure.step("Click select our TV"):
+            self.move_to_element(self.get_select_our_tv())
+            self.get_select_our_tv().click()
+            print("Selected our tv")
+            time.sleep(1.5)
+            self.get_screenshot("spp")
 
     # Methods
 
     def full_brand_selection(self):
-        self.click_brand_filter()
-        time.sleep(self.sleep)
-        self.click_show_all()
-        time.sleep(self.sleep)
-        self.input_brand_in_search("Xiaomi")
-        time.sleep(self.sleep)
-        self.click_select_xiaomi()
-        time.sleep(self.sleep)
-        self.click_ready()
-        time.sleep(self.sleep)
+        with allure.step("Full brand selecttion"):
+            Logger.add_start_step(method="full_brand_selection")
+            self.click_brand_filter()
+            self.click_show_all()
+            self.input_brand_in_search("Xiaomi")
+            self.click_select_xiaomi()
+            self.click_ready()
+            Logger.add_end_step(method="full_brand_selection")
 
     def full_price_selection(self):
-        self.click_price_filter()
-        time.sleep(self.sleep)
-        self.input_start_price(30000)
-        time.sleep(self.sleep)
-        self.input_end_price(50000)
-        time.sleep(self.sleep)
-        self.click_ready()
-        time.sleep(self.sleep)
+        with allure.step("Full price selecttion"):
+            Logger.add_start_step(method="full_price_selection")
+            self.click_price_filter()
+            self.input_start_price(30000)
+            self.input_end_price(50000)
+            self.click_ready()
+            Logger.add_end_step(method="full_price_selection")
 
     def full_all_filters_selection(self):
-        self.click_all_filters()
-        time.sleep(self.sleep)
-        self.move_to_element(self.get_diagonal_50())
-        time.sleep(self.sleep)
-        self.select_diagonal_50()
-        time.sleep(self.sleep)
-        self.move_to_element(self.get_wi_fi())
-        time.sleep(self.sleep)
-        self.select_smart_tv()
-        time.sleep(self.sleep)
-        self.select_wi_fi()
-        time.sleep(self.sleep)
-        self.click_show()
+        with allure.step("Full all filters selecttion"):
+            Logger.add_start_step(method="full_all_filters_selection")
+            self.click_all_filters()
+            self.move_to_element(self.get_diagonal_50())
+            self.select_diagonal_50()
+            self.move_to_element(self.get_wi_fi())
+            self.select_smart_tv()
+            self.select_wi_fi()
+            self.click_show()
+            Logger.add_end_step(method="full_all_filters_selection")

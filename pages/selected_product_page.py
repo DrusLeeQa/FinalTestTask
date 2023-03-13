@@ -1,9 +1,10 @@
 import time
-
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
+from utilities.logger import Logger
 
 
 class SelProPage(Base):
@@ -11,8 +12,6 @@ class SelProPage(Base):
         super().__init__(driver)
 
     # Service variables
-
-    sleep = 1
 
     # Locators
 
@@ -52,10 +51,13 @@ class SelProPage(Base):
     # Methods
 
     def combine_add_and_move_to_basket(self):
-        Base.spp_name = self.get_selected_product_name().text
-        Base.spp_price = self.get_selected_product_price().text
-        self.click_add_to_basket()
-        self.click_move_to_basket()
-        self.get_current_url()
-        time.sleep(1.5)
-        self.get_screenshot("bp")
+        with allure.step("Combine add and move to basket"):
+            Logger.add_start_step(method="combine_add_and_move_to_basket")
+            Base.spp_name = self.get_selected_product_name().text
+            Base.spp_price = self.get_selected_product_price().text
+            self.click_add_to_basket()
+            self.click_move_to_basket()
+            self.get_current_url()
+            time.sleep(1.5)
+            self.get_screenshot("bp")
+            Logger.add_end_step(method="combine_add_and_move_to_basket")

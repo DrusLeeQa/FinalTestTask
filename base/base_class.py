@@ -1,4 +1,6 @@
 import datetime
+import time
+import allure
 from selenium.webdriver import ActionChains
 
 
@@ -15,11 +17,13 @@ class Base:
     """Method that opens browser"""
 
     def open_main_page(self):
-        self.driver.get(self.url)
-        self.driver.maximize_window()
-        print("\nOpen Browser")
-        self.get_current_url()
-        self.assert_url("https://www.wildberries.ru/")
+        with allure.step("Open Main Page"):
+            self.driver.get(self.url)
+            self.driver.maximize_window()
+            print("\nOpen Browser")
+            self.get_current_url()
+            self.assert_url("https://www.wildberries.ru/")
+            time.sleep(1)
 
     """Method that gets the current url"""
 
@@ -38,7 +42,7 @@ class Base:
     """Method for taking screenshots"""
 
     def get_screenshot(self, value):
-        now_date = datetime.datetime.utcnow().strftime("%d.%m.%Y")
+        now_date = datetime.datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
         name_screenshot = f"screenshot_{value}_{now_date}.png"
         self.driver.save_screenshot(
             'C:\\PycharmProjects\\FinalTestTask\\screens\\' + name_screenshot)
