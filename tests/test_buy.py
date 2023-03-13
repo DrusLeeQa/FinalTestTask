@@ -1,4 +1,3 @@
-import time
 import allure
 from selenium import webdriver
 from base.base_class import Base
